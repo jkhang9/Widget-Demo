@@ -72,36 +72,6 @@ That's **240 windows** and **5,460 complete designs**, before you count the weat
 
 Try every look, weather, size and window option right in the browser. Search any of ~34,000 cities to see its real local time, and the widget switches to its night look after sunset there. The demo uses sample weather; live weather sync is in the app.
 
-**Run it locally**
-
-```bash
-cd site
-python3 -m http.server 8000
-# open http://localhost:8000
-```
-
-**Deploy on GitHub Pages:** put `index.html` and the `data/` folder in the repo root, then go to *Settings → Pages → Deploy from a branch → main → / (root)*.
-
-<br>
-
-## 📱 The iOS app
-
-```
-PixelWindow/
-├── Shared/              ← add to BOTH the app and the widget targets
-│   ├── PixelWindow.swift    window + weather art, wallpapers, layouts, palettes
-│   └── Aesthetics.swift     the seven looks and the character weather display
-├── Widget/
-│   └── PixelWeatherWidget.swift   timeline, weather fetch, widget sizes
-└── App/
-    └── ContentView.swift          the design studio
-```
-
-1. Create an iOS app (SwiftUI, iOS 17) and add a **Widget Extension**.
-2. Drop in the files above. The `Shared/` files go in both targets.
-3. Add the same **App Group** to both targets and set `StyleStore.appGroup` to match.
-4. Add location usage descriptions (`NSLocationWhenInUseUsageDescription` in the app, `NSWidgetWantsLocation` in the widget).
-5. Run on your phone, design your window in the app, then add the widget.
 
 <br>
 
