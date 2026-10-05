@@ -66,6 +66,18 @@ button:active{transform:scale(.88)}button:focus-visible{outline:2px solid #1c1c1
 .sw.sel{box-shadow:0 0 0 2px #fff,0 0 0 4.5px #1c1c1e}
 .note{position:absolute;left:0;right:0;bottom:24px;margin:0;text-align:center;font:400 12.5px/16px -apple-system,system-ui,sans-serif;color:#8a8a92;pointer-events:none}
 #msg{position:fixed;inset:0;display:grid;place-items:center;font:500 15px/1.4 -apple-system,system-ui,sans-serif;color:#8a8a92;pointer-events:none;text-align:center;padding:24px;z-index:5}
+@media (max-width:520px){
+ .panel{padding:14px 12px;border-radius:26px}
+ .row{gap:6px}.row.t button,.row.t canvas{width:40px;height:40px;border-radius:11px}
+ .t .mark{width:50px;height:50px;border-radius:15px}
+ .row.i button,.i .mark{width:40px;height:40px}.row.i svg{width:22px;height:22px}
+ .tabs{flex-wrap:wrap}.tab{padding:8px 10px}
+ .sws{gap:8px}.grp{gap:8px}.sw{width:36px;height:36px}.sep{margin:0 4px}
+}
+@media (max-width:360px){
+ .row{gap:4px}.row.t button,.row.t canvas,.row.i button,.i .mark{width:34px;height:34px}
+ .t .mark{width:44px;height:44px;border-radius:13px}.row.i svg{width:20px;height:20px}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
 <div id="msg">Loading…</div>
@@ -601,11 +613,12 @@ function renderSwatches(){const r=$("sws");r.innerHTML="";const gs=groupsFor(tab
 // The widget is always drawn at the same scale (its width never changes).
 // Only the two gaps flex: 80px when there's room, shrinking to 16px on short screens.
 const D=1;   // the widget at its real iPhone size (1pt = 1px); change this one number to scale it
-function fit(){const p=document.querySelector(".panel"),win=$("win"),inner=win.firstElementChild;
+function fit(){const d=Math.min(D,(document.documentElement.clientWidth-32)/338);   // on phones, shrink so the widest widget fits the screen
+ const p=document.querySelector(".panel"),win=$("win"),inner=win.firstElementChild;
  const ph=win.classList.contains("off")?p.offsetHeight+inner.scrollHeight+12:p.offsetHeight;   // use the full panel so gaps don't jump between looks
- const content=document.querySelector(".loc").offsetHeight+354*D+ph+96;                       // tallest widget + picker + panel + page padding
+ const content=document.querySelector(".loc").offsetHeight+354*d+ph+96;                       // tallest widget + picker + panel + page padding
  const gap=Math.max(16,Math.min(80,(innerHeight-content)/2));
- document.documentElement.style.setProperty("--d",D);document.documentElement.style.setProperty("--gap",gap+"px");size()}
+ document.documentElement.style.setProperty("--d",d);document.documentElement.style.setProperty("--gap",gap+"px");size()}
 function size(){const[w,h]=DIM[st.size],d=+getComputedStyle(document.documentElement).getPropertyValue("--d");$("w").style.width=w*d+"px";$("w").style.height=h*d+"px";document.querySelector(".stage").style.height=h*d+"px"}
 function marks(){for(const g of["aes","wx","size"]){const r=$(g),b=r.querySelector(`[data-k="${st[g]}"]`);r.querySelectorAll("button").forEach(x=>x.classList.toggle("sel",x===b));r.querySelector(".mark").style.transform=`translate(${b.offsetLeft}px,${b.offsetTop}px)`}}
 function markSw(){$("sws").querySelectorAll(".sw").forEach(b=>{const on=b.dataset.k===String(st[b.dataset.g]);b.classList.toggle("sel",on);b.setAttribute("aria-pressed",on)});
@@ -679,7 +692,7 @@ function updateDay(force){const d=sunUp(place.lat,place.lon,new Date());if(d===i
 updateDay(true);setInterval(()=>updateDay(false),30000);
 $("locname").textContent=placeOf(city());
 setInterval(()=>{tickN++;paint($(front))},420);
-addEventListener("resize",fit);
+addEventListener("resize",()=>{fit();marks()});
 document.querySelector('.bg[data-a=pixel]').classList.add("on");
 renderTabs();renderSwatches();fit();paint($("a"));marks();refreshSwatches();{const m=$("msg");if(m)m.remove()}
 requestAnimationFrame(()=>{fit();marks()});
