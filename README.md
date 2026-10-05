@@ -6,6 +6,8 @@
 A weather widget for iPhone, drawn pixel by pixel, in seven looks.
 
 [**▶ Try the live demo**](https://jkhang9.github.io/Widget-Demo/) 
+<br>
+
 [**▶ App Store**]&nbsp;·&nbsp; iOS 17+ &nbsp;·&nbsp; SwiftUI + WidgetKit 
 
 <br>
