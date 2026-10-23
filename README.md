@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🪟 Pixel Window
+# 🪟 Pixel Window!
 
 **A tiny window on your Home Screen that shows today's sky.**<br>
 A weather widget for iPhone, drawn pixel by pixel, in seven looks.
