@@ -2,7 +2,7 @@
 
 # 🪟 Pixel Window
 
-**A tiny window on your Home Screen that shows today's sky. **<br>
+**A tiny window on your Home Screen that shows today's weather. **<br>
 A weather widget for iPhone, drawn pixel by pixel, in seven looks.
 
 [**▶ Try the live demo**](https://jkhang9.github.io/Widget-Demo/) 
